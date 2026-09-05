@@ -16,8 +16,8 @@ SLOT="0"
 KEYWORDS=""
 
 # Pure data: JSON command maps plus the boot-chain assets shared with
-# freedomnas-image-builder. Nothing here is compiled or executed at build time.
-RDEPEND=""
+# freedomnas-image-builder. Nothing here is compiled or executed at build time,
+# and nothing is needed at runtime beyond the files themselves.
 
 src_install() {
 	insinto /usr/lib/freedomnas/profiles

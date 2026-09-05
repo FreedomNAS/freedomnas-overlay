@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{12..14} )
+PYTHON_COMPAT=( python3_{12..15} )
 
 inherit git-r3 python-single-r1
 
@@ -47,10 +47,11 @@ src_install() {
 	doins -r *.py modules
 
 	# freedomnas-core is imported as the `freedomnas` package; the .pth puts
-	# its parent on sys.path for the selected interpreter.
-	echo "${CORE_DIR}" > "${T}"/freedomnas-core.pth || die
-	insinto "$(python_get_sitedir)"
-	doins "${T}"/freedomnas-core.pth
+	# its parent on sys.path for the selected interpreter. python_domodule
+	# targets site-packages directly, which insinto "$(python_get_sitedir)"
+	# cannot do without doubling EPREFIX on a prefix install.
+	echo "${EPREFIX}${CORE_DIR}" > "${T}"/freedomnas-core.pth || die
+	python_domodule "${T}"/freedomnas-core.pth
 
 	newbin bin/freedomnas freedomnas
 	python_fix_shebang "${ED}"/usr/bin/freedomnas

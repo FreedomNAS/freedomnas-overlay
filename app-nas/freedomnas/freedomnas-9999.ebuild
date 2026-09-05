@@ -5,6 +5,7 @@ EAPI=8
 
 DESCRIPTION="FreedomNAS — OS-agnostic storage appliance (meta package)"
 HOMEPAGE="https://codeberg.org/FreedomNAS"
+S="${WORKDIR}"
 
 LICENSE="metapackage"
 SLOT="0"
@@ -18,5 +19,3 @@ RDEPEND="
 	webui? ( app-nas/freedomnas-webui )
 	installer? ( app-nas/freedomnas-installer )
 "
-
-S="${WORKDIR}"
