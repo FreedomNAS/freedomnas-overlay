@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		The engine every FreedomNAS component runs on. It translates abstract
+		actions into the native commands of the detected operating system and
+		init system, reading them from freedomnas-profiles rather than
+		hardcoding any of them. Also provides the configuration manager, the
+		reconciler used for disaster recovery, encrypted-pool key management,
+		and the module orchestrator.
+	</longdescription>
+	<upstream>
+		<remote-id type="codeberg">FreedomNAS/freedomnas-core</remote-id>
+	</upstream>
+</pkgmetadata>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		Pulls in a complete FreedomNAS installation: the engine, the OS
+		profiles, and by default the WebUI. Add USE=installer if this machine
+		should also be able to provision other systems.
+	</longdescription>
+	<use>
+		<flag name="webui">Install the FastAPI web interface</flag>
+		<flag name="installer">Install the provisioning tool (freedomnas-install)</flag>
+	</use>
+</pkgmetadata>

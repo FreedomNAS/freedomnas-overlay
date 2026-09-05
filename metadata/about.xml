@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "http://www.gentoo.org/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo priority="50" quality="experimental" status="unofficial">
+    <name>freedomnas</name>
+    <description lang="en">FreedomNAS — OS-agnostic storage appliance</description>
+    <homepage>https://codeberg.org/FreedomNAS</homepage>
+    <owner type="project">
+      <email>dev@freedomnas.io</email>
+      <name>FreedomNAS Team</name>
+    </owner>
+    <source type="git">
+      <uri protocol="https">https://codeberg.org/FreedomNAS/freedomnas-overlay.git</uri>
+    </source>
+  </repo>
+</repositories>

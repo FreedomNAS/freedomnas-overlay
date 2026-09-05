@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		Provisions FreedomNAS onto a dedicated disk, or onto the system that
+		is already running. Every OS command it issues — including the chroot
+		invocation and the contents of distribution-specific configuration
+		files — comes from freedomnas-profiles through the engine, so the
+		installer itself contains no distribution-specific logic. Pre-built
+		images remain the primary install path; this covers hardware that
+		cannot be flashed, console installs, and adopting an existing system.
+	</longdescription>
+	<upstream>
+		<remote-id type="codeberg">FreedomNAS/freedomnas-installer</remote-id>
+	</upstream>
+</pkgmetadata>

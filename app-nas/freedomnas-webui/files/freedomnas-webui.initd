@@ -1,0 +1,20 @@
+#!/sbin/openrc-run
+# FreedomNAS WebUI — optional OpenRC service.
+#
+# The canonical, init-agnostic startup path is the cron @reboot hook
+# (USE=cron), which is what every FreedomNAS image and installer produces.
+# This service exists only for Gentoo systems that would rather manage the
+# WebUI the way they manage everything else. Pick one or the other, not both.
+
+description="FreedomNAS WebUI"
+
+command="/usr/lib/freedomnas/webui/bin/firstboot.sh"
+command_background="yes"
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="/var/log/freedomnas-webui.log"
+error_log="/var/log/freedomnas-webui.log"
+
+depend() {
+	need net
+	after zfs-mount
+}

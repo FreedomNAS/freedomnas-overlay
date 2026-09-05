@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		The FreedomNAS web interface: a FastAPI backend over freedomnas-core
+		and a dependency-free Jinja2 frontend with three UI levels. Includes
+		the first-run wizard that configures a freshly installed or freshly
+		flashed system.
+	</longdescription>
+	<use>
+		<flag name="cron">Start the WebUI at boot through a cron @reboot hook —
+			the init-agnostic path FreedomNAS uses on every edition</flag>
+		<flag name="openrc">Install an OpenRC service instead of the cron hook</flag>
+	</use>
+	<upstream>
+		<remote-id type="codeberg">FreedomNAS/freedomnas-webui</remote-id>
+	</upstream>
+</pkgmetadata>

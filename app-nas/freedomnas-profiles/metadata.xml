@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		The JSON translator layer every other FreedomNAS component reads at
+		runtime: one command map per operating system and init system, the
+		package category definitions, the installer fragments, and the
+		vendored boot-chain assets (Clover, the dracut UKI kernel hook, and
+		the boot-time scripts). Contains no executable logic of its own.
+	</longdescription>
+	<upstream>
+		<remote-id type="codeberg">FreedomNAS/freedomnas-profiles</remote-id>
+	</upstream>
+</pkgmetadata>

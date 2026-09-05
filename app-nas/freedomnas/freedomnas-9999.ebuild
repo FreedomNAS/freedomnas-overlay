@@ -1,0 +1,22 @@
+# Copyright 2026 FreedomNAS Team
+# Distributed under the terms of the Mozilla Public License v2.0
+
+EAPI=8
+
+DESCRIPTION="FreedomNAS — OS-agnostic storage appliance (meta package)"
+HOMEPAGE="https://codeberg.org/FreedomNAS"
+
+LICENSE="metapackage"
+SLOT="0"
+KEYWORDS=""
+
+IUSE="+webui installer"
+
+RDEPEND="
+	app-nas/freedomnas-core
+	app-nas/freedomnas-profiles
+	webui? ( app-nas/freedomnas-webui )
+	installer? ( app-nas/freedomnas-installer )
+"
+
+S="${WORKDIR}"
