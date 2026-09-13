@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		pacstrap and genfstab from Arch Linux's install scripts. arch-chroot, built from the same sources, is provided by sys-apps/arch-chroot.
+	</longdescription>
+	<upstream>
+		<remote-id type="gitlab">archlinux/arch-install-scripts</remote-id>
+	</upstream>
+</pkgmetadata>

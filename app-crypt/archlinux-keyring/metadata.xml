@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		The keyring Arch Linux packages are signed with, repackaged from the Arch archive so that pacman-key --populate archlinux works on a Gentoo host.
+	</longdescription>
+	<upstream>
+		<remote-id type="gitlab">archlinux/archlinux-keyring</remote-id>
+	</upstream>
+</pkgmetadata>

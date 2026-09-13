@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		The Arch Linux package manager, built so that a Gentoo host - the FreedomNAS live ISO in particular - can bootstrap the Arch and Artix editions natively with pacstrap. Its scriptlet shell and ldconfig paths are those of the Arch or Artix root being installed, not the host's.
+	</longdescription>
+	<upstream>
+		<remote-id type="gitlab">pacman/pacman</remote-id>
+	</upstream>
+</pkgmetadata>

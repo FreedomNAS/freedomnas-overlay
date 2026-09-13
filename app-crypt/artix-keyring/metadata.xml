@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		The keyring Artix Linux packages are signed with, repackaged from the Artix archive so that pacman-key --populate artix works on a Gentoo host.
+	</longdescription>
+</pkgmetadata>

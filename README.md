@@ -13,6 +13,22 @@ unrelated tools.
 | `app-nas/freedomnas-installer` | Provisioning tool → `freedomnas-install` |
 | `app-nas/freedomnas` | Meta package pulling the stack together |
 
+### Bootstrap tools for the pacman-based editions
+
+These let a Gentoo host — the FreedomNAS live ISO in particular — install
+the Arch and Artix editions with `pacstrap` instead of a rootfs tarball.
+They are ordinary versioned ebuilds, keyworded `~amd64`.
+
+| Package | What it installs |
+|---------|------------------|
+| `sys-apps/pacman` | pacman, `pacman-key`, libalpm. Scriptlet shell and `ldconfig` point at the paths of the Arch/Artix root being installed |
+| `sys-apps/arch-install-scripts` | `pacstrap` and `genfstab`; `arch-chroot` comes from `::gentoo`'s `sys-apps/arch-chroot` |
+| `app-crypt/archlinux-keyring` | `/usr/share/pacman/keyrings/archlinux*`, repackaged from `archive.archlinux.org` |
+| `app-crypt/artix-keyring` | `/usr/share/pacman/keyrings/artix*`, repackaged from `archive.artixlinux.org` |
+
+A keyring is only as current as its ebuild: packages signed by a key added
+upstream after that version fail verification until the ebuild is bumped.
+
 ## Adding the overlay
 
 With `eselect repository`:
