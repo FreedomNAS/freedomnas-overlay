@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		Topgrade runs the update command of every package manager, language
+		toolchain and container runtime it finds, which is what the WebUI's
+		Updates page drives. This package installs the release binary rather
+		than building it: the source ebuild pulls the whole Rust toolchain
+		and several hundred crates, which is a long compile on a NAS.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">topgrade-rs/topgrade</remote-id>
+	</upstream>
+</pkgmetadata>
