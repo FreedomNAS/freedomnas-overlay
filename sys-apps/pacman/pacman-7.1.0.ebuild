@@ -1,5 +1,5 @@
 # Copyright 2026 FreedomNAS Team
-# Distributed under the terms of the Mozilla Public License v2.0
+# Distributed under the terms of the GNU General Public License v2 or later
 
 EAPI=8
 

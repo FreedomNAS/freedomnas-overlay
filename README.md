@@ -115,4 +115,8 @@ scripts cannot drift from the ones baked into the images.
 
 ## License
 
-Ebuilds: MPL-2.0, matching upstream.
+GPL-2.0-or-later: the GNU General Public License, version 2 or (at your
+option) any later version. The text of version 2 is in `LICENSE`.
+
+The packages the ebuilds install keep their own licenses — MPL-2.0 for the
+FreedomNAS components, as each ebuild's `LICENSE` says.
