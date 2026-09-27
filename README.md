@@ -9,7 +9,8 @@ unrelated tools.
 |---------|------------------|
 | `app-nas/freedomnas-profiles` | The JSON translator layer + boot-chain assets → `/usr/lib/freedomnas/profiles` |
 | `app-nas/freedomnas-core` | Engine, config manager, reconciler → `/usr/lib/freedomnas/core` + `freedomnas` CLI |
-| `app-nas/freedomnas-webui` | FastAPI backend and Jinja2 frontend → `/usr/lib/freedomnas/webui` |
+| `app-nas/freedomnas-docs` | The documentation, built for offline reading → `/usr/lib/freedomnas/docs`, served by the WebUI at `/docs/` |
+| `app-nas/freedomnas-webui` | FastAPI backend and Jinja2 frontend → `/usr/lib/freedomnas/webui`; depends on `freedomnas-docs` |
 | `app-nas/freedomnas-installer` | Provisioning tool → `freedomnas-install` |
 | `app-nas/freedomnas` | Meta package pulling the stack together |
 
@@ -28,6 +29,20 @@ They are ordinary versioned ebuilds, keyworded `~amd64`.
 
 A keyring is only as current as its ebuild: packages signed by a key added
 upstream after that version fail verification until the ebuild is bumped.
+
+### MkDocs, to build freedomnas-docs
+
+MkDocs left `::gentoo`, so the overlay carries it and what it needs that the
+tree no longer has, for Python 3.11 to 3.14. They are ordinary versioned
+ebuilds, keyworded `~amd64`, with their original headers.
+
+| Package | Why |
+|---------|-----|
+| `dev-python/mkdocs` | builds the documentation |
+| `dev-python/mkdocs-material` | its theme (`USE=social` for the social cards, not needed here) |
+| `dev-python/mkdocs-material-extensions` | pulled in by mkdocs-material |
+| `dev-python/mkdocs-get-deps`, `ghp-import`, `mergedeep`, `pyyaml-env-tag` | mkdocs' dependencies |
+| `dev-python/paginate`, `readtime` | mkdocs-material's dependencies |
 
 ## Adding the overlay
 

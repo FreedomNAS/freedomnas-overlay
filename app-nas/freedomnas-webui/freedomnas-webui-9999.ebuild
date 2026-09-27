@@ -24,6 +24,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE} ?? ( cron openrc )"
 RDEPEND="
 	${PYTHON_DEPS}
 	app-nas/freedomnas-core[${PYTHON_SINGLE_USEDEP}]
+	app-nas/freedomnas-docs
 	$(python_gen_cond_dep '
 		dev-python/fastapi[${PYTHON_USEDEP}]
 		dev-python/uvicorn[${PYTHON_USEDEP}]
@@ -41,6 +42,11 @@ WEBUI_DIR="/usr/lib/freedomnas/webui"
 src_install() {
 	insinto "${WEBUI_DIR}"
 	doins -r api frontend websocket
+
+	local base
+	base=$(sed -n '1s/^[^(]*(\([^)]*\)).*/\1/p' debian/changelog) || die
+	echo "${base%-*}+git.${EGIT_VERSION:0:7}" > "${T}"/VERSION || die
+	doins "${T}"/VERSION
 
 	# firstboot.sh and supervisor.sh are shared verbatim with
 	# freedomnas-image-builder and live in freedomnas-profiles/assets/.
