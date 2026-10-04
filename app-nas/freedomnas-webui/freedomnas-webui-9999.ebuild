@@ -25,6 +25,7 @@ RDEPEND="
 	${PYTHON_DEPS}
 	app-nas/freedomnas-core[${PYTHON_SINGLE_USEDEP}]
 	app-nas/freedomnas-docs
+	sys-apps/smartmontools
 	$(python_gen_cond_dep '
 		dev-python/fastapi[${PYTHON_USEDEP}]
 		dev-python/uvicorn[${PYTHON_USEDEP}]
