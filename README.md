@@ -66,12 +66,24 @@ masters = gentoo
 
 ## Installing
 
-The ebuilds are **live** (`-9999`) and therefore keyword-masked, as every
-live ebuild is. Unmask them in `/etc/portage/package.accept_keywords`:
+Each FreedomNAS package comes in two forms:
+
+| Version | Source | Keywords |
+|---------|--------|----------|
+| `X.Y.Z` (release) | the `vX.Y.Z` tag, as Codeberg's archive tarball | `~amd64` |
+| `9999` (live) | the `dev` branch, with git | none |
+
+Pick one in `/etc/portage/package.accept_keywords` — the releases:
 
 ```
-app-nas/* **
+app-nas/*::freedomnas ~amd64
+*/*::freedomnas ~amd64
 ```
+
+or `dev`, with `app-nas/*::freedomnas **` as the first line. The second
+line accepts the MkDocs packages `freedomnas-docs` is built with. The
+FreedomNAS installer writes exactly this, from the channel it installs
+(`/etc/portage/package.accept_keywords/freedomnas-channel`).
 
 Then:
 
@@ -106,14 +118,17 @@ the main repository). `USE=openrc` exists because a Gentoo system may prefer
 to manage the service the way it manages everything else; it is a local
 convenience, and nothing else in the project depends on it.
 
-## Live ebuilds
+## Releases
 
-There are no released tags upstream yet, so every ebuild is a `-9999` live
-build tracking the **`dev`** branch, where the current work lives. Once `dev`
-is merged and tagged:
+A release adds `<name>-X.Y.Z.ebuild` for the six `app-nas` packages, a copy
+of the `9999` ebuild (one file serves both forms: `PV` decides between
+git and the tarball), and its Manifest:
 
-- drop `EGIT_BRANCH="dev"` from the ebuilds
-- add versioned ebuilds using Codeberg's archive tarballs
+```sh
+for p in app-nas/freedomnas*; do cp $p/${p#*/}-9999.ebuild $p/${p#*/}-X.Y.Z.ebuild; done
+for p in app-nas/freedomnas-*; do (cd $p && ebuild ${p#*/}-X.Y.Z.ebuild manifest); done
+pkgcheck scan app-nas/
+```
 
 ## Notes for packagers
 

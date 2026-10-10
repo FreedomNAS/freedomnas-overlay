@@ -3,17 +3,21 @@
 
 EAPI=8
 
-inherit git-r3
-
 DESCRIPTION="FreedomNAS OS profiles — the JSON translator layer"
 HOMEPAGE="https://codeberg.org/FreedomNAS/freedomnas-profiles"
-EGIT_REPO_URI="https://codeberg.org/FreedomNAS/freedomnas-profiles.git"
-# Track dev until it is merged into main.
-EGIT_BRANCH="dev"
+
+if [[ ${PV} == 9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://codeberg.org/FreedomNAS/${PN}.git"
+	EGIT_BRANCH="dev"
+else
+	SRC_URI="https://codeberg.org/FreedomNAS/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}"
+	KEYWORDS="~amd64"
+fi
 
 LICENSE="MPL-2.0"
 SLOT="0"
-KEYWORDS=""
 
 # Pure data: JSON command maps plus the boot-chain assets shared with
 # freedomnas-image-builder. Nothing here is compiled or executed at build time,

@@ -9,7 +9,7 @@ S="${WORKDIR}"
 
 LICENSE="metapackage"
 SLOT="0"
-KEYWORDS=""
+[[ ${PV} == 9999 ]] || KEYWORDS="~amd64"
 
 IUSE="+webui installer"
 

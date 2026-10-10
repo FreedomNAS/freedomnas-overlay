@@ -1,0 +1,94 @@
+# Copyright 2026 FreedomNAS Team
+# Distributed under the terms of the GNU General Public License v2 or later
+
+EAPI=8
+
+PYTHON_COMPAT=( python3_{12..15} )
+
+inherit python-single-r1
+
+DESCRIPTION="FreedomNAS WebUI — FastAPI backend and Jinja2 frontend"
+HOMEPAGE="https://codeberg.org/FreedomNAS/freedomnas-webui"
+
+if [[ ${PV} == 9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://codeberg.org/FreedomNAS/${PN}.git"
+	EGIT_BRANCH="dev"
+else
+	SRC_URI="https://codeberg.org/FreedomNAS/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}"
+	KEYWORDS="~amd64"
+fi
+
+LICENSE="MPL-2.0"
+SLOT="0"
+
+IUSE="+cron openrc"
+# Both would start the WebUI twice.
+REQUIRED_USE="${PYTHON_REQUIRED_USE} ?? ( cron openrc )"
+
+RDEPEND="
+	${PYTHON_DEPS}
+	app-nas/freedomnas-core[${PYTHON_SINGLE_USEDEP}]
+	app-nas/freedomnas-docs
+	sys-apps/smartmontools
+	$(python_gen_cond_dep '
+		dev-python/fastapi[${PYTHON_USEDEP}]
+		dev-python/uvicorn[${PYTHON_USEDEP}]
+		dev-python/jinja2[${PYTHON_USEDEP}]
+		dev-python/python-multipart[${PYTHON_USEDEP}]
+		dev-python/python-pam[${PYTHON_USEDEP}]
+		dev-python/pyyaml[${PYTHON_USEDEP}]
+		dev-python/websockets[${PYTHON_USEDEP}]
+	')
+	cron? ( virtual/cron )
+"
+
+WEBUI_DIR="/usr/lib/freedomnas/webui"
+
+src_install() {
+	insinto "${WEBUI_DIR}"
+	doins -r api frontend websocket
+
+	local version=${PV}
+	if [[ ${PV} == 9999 ]]; then
+		version=$(sed -n '1s/^[^(]*(\([^)]*\)).*/\1/p' debian/changelog) || die
+		version="${version%-*}+git.${EGIT_VERSION:0:7}"
+	fi
+	echo "${version}" > "${T}"/VERSION || die
+	doins "${T}"/VERSION
+
+	# firstboot.sh and supervisor.sh are shared verbatim with
+	# freedomnas-image-builder and live in freedomnas-profiles/assets/.
+	# Symlink rather than vendor a second copy that could drift.
+	dodir "${WEBUI_DIR}/bin"
+	dosym ../../profiles/assets/firstboot.sh "${WEBUI_DIR}/bin/firstboot.sh"
+	dosym ../../profiles/assets/supervisor.sh "${WEBUI_DIR}/bin/supervisor.sh"
+
+	if use cron; then
+		insinto /etc/cron.d
+		newins "${FILESDIR}"/freedomnas-webui.cron freedomnas-webui
+	fi
+
+	if use openrc; then
+		newinitd "${FILESDIR}"/freedomnas-webui.initd freedomnas-webui
+	fi
+
+}
+
+pkg_postinst() {
+	elog "The WebUI listens on port 8080 once started."
+	elog ""
+	if use cron; then
+		elog "It starts at boot through the cron @reboot hook in"
+		elog "/etc/cron.d/freedomnas-webui — the init-agnostic path FreedomNAS"
+		elog "uses on every edition. Make sure a cron daemon is running."
+	elif use openrc; then
+		elog "Enable the OpenRC service with:"
+		elog "    rc-update add freedomnas-webui default"
+	else
+		elog "Neither USE=cron nor USE=openrc is set, so nothing starts the"
+		elog "WebUI automatically. Start it by hand with:"
+		elog "    /usr/lib/freedomnas/webui/bin/firstboot.sh &"
+	fi
+}

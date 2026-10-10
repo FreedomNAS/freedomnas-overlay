@@ -5,17 +5,23 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{12..15} )
 
-inherit git-r3 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="FreedomNAS core engine — OS abstraction, config, reconciler"
 HOMEPAGE="https://codeberg.org/FreedomNAS/freedomnas-core"
-EGIT_REPO_URI="https://codeberg.org/FreedomNAS/freedomnas-core.git"
-# Track dev until it is merged into main.
-EGIT_BRANCH="dev"
+
+if [[ ${PV} == 9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://codeberg.org/FreedomNAS/${PN}.git"
+	EGIT_BRANCH="dev"
+else
+	SRC_URI="https://codeberg.org/FreedomNAS/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}"
+	KEYWORDS="~amd64"
+fi
 
 LICENSE="MPL-2.0"
 SLOT="0"
-KEYWORDS=""
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 

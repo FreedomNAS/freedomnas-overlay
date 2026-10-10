@@ -5,17 +5,23 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{12..15} )
 
-inherit git-r3 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="FreedomNAS WebUI — FastAPI backend and Jinja2 frontend"
 HOMEPAGE="https://codeberg.org/FreedomNAS/freedomnas-webui"
-EGIT_REPO_URI="https://codeberg.org/FreedomNAS/freedomnas-webui.git"
-# Track dev until it is merged into main.
-EGIT_BRANCH="dev"
+
+if [[ ${PV} == 9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://codeberg.org/FreedomNAS/${PN}.git"
+	EGIT_BRANCH="dev"
+else
+	SRC_URI="https://codeberg.org/FreedomNAS/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}"
+	KEYWORDS="~amd64"
+fi
 
 LICENSE="MPL-2.0"
 SLOT="0"
-KEYWORDS=""
 
 IUSE="+cron openrc"
 # Both would start the WebUI twice.
@@ -44,9 +50,12 @@ src_install() {
 	insinto "${WEBUI_DIR}"
 	doins -r api frontend websocket
 
-	local base
-	base=$(sed -n '1s/^[^(]*(\([^)]*\)).*/\1/p' debian/changelog) || die
-	echo "${base%-*}+git.${EGIT_VERSION:0:7}" > "${T}"/VERSION || die
+	local version=${PV}
+	if [[ ${PV} == 9999 ]]; then
+		version=$(sed -n '1s/^[^(]*(\([^)]*\)).*/\1/p' debian/changelog) || die
+		version="${version%-*}+git.${EGIT_VERSION:0:7}"
+	fi
+	echo "${version}" > "${T}"/VERSION || die
 	doins "${T}"/VERSION
 
 	# firstboot.sh and supervisor.sh are shared verbatim with
