@@ -12,6 +12,7 @@ unrelated tools.
 | `app-nas/freedomnas-docs` | The documentation, built for offline reading → `/usr/lib/freedomnas/docs`, served by the WebUI at `/docs/` |
 | `app-nas/freedomnas-webui` | FastAPI backend and Jinja2 frontend → `/usr/lib/freedomnas/webui`; depends on `freedomnas-docs` |
 | `app-nas/freedomnas-installer` | Provisioning tool → `freedomnas-install` |
+| `app-nas/freedomnas-module-containers` | The containers community module (Docker on ZFS datasets, apps, catalogue) → `/usr/lib/freedomnas/modules/containers` and `/usr/lib/freedomnas/profiles/containers`; live ebuild only until the module has a release |
 | `app-nas/freedomnas` | Meta package pulling the stack together |
 
 ### Bootstrap tools for the pacman-based editions

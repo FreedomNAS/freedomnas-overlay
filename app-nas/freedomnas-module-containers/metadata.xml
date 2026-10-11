@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		A FreedomNAS community module that installs Docker from the WebUI,
+		keeps its data on ZFS datasets of a chosen pool, runs Docker Compose
+		apps on datasets of their own and installs ready-made apps from a
+		catalogue (Home Assistant, Immich, Jellyfin, Nextcloud, Pi-hole,
+		Vaultwarden).
+	</longdescription>
+	<upstream>
+		<remote-id type="codeberg">FreedomNAS/freedomnas-containers</remote-id>
+	</upstream>
+</pkgmetadata>
