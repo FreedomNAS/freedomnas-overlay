@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>dev@freedomnas.io</email>
+		<name>FreedomNAS Team</name>
+	</maintainer>
+	<longdescription lang="en">
+		A FreedomNAS community module that installs Caddy from the WebUI and
+		puts it in front of the NAS's web apps, serving each over HTTPS on its
+		own port with FreedomNAS's own certificate; the containers module's
+		catalogue apps go behind it by themselves.
+	</longdescription>
+	<upstream>
+		<remote-id type="codeberg">FreedomNAS/freedomnas-proxy</remote-id>
+	</upstream>
+</pkgmetadata>

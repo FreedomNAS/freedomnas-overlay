@@ -13,6 +13,7 @@ unrelated tools.
 | `app-nas/freedomnas-webui` | FastAPI backend and Jinja2 frontend → `/usr/lib/freedomnas/webui`; depends on `freedomnas-docs` |
 | `app-nas/freedomnas-installer` | Provisioning tool → `freedomnas-install` |
 | `app-nas/freedomnas-module-containers` | The containers community module (Docker on ZFS datasets, apps, catalogue) → `/usr/lib/freedomnas/modules/containers` and `/usr/lib/freedomnas/profiles/containers`; live ebuild only until the module has a release |
+| `app-nas/freedomnas-module-proxy` | The reverse proxy community module (Caddy, HTTPS for every web app) → `/usr/lib/freedomnas/modules/proxy` and `/usr/lib/freedomnas/profiles/proxy`; live ebuild only until the module has a release |
 | `app-nas/freedomnas` | Meta package pulling the stack together |
 
 ### Bootstrap tools for the pacman-based editions
