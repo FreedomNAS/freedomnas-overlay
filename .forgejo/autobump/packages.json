@@ -1,0 +1,34 @@
+{
+	"app-nas/freedomnas": {"type": "release", "repo": "FreedomNAS/freedomnas-core"},
+	"app-nas/freedomnas-core": {"type": "release", "repo": "FreedomNAS/freedomnas-core"},
+	"app-nas/freedomnas-profiles": {"type": "release", "repo": "FreedomNAS/freedomnas-profiles"},
+	"app-nas/freedomnas-webui": {"type": "release", "repo": "FreedomNAS/freedomnas-webui"},
+	"app-nas/freedomnas-installer": {"type": "release", "repo": "FreedomNAS/freedomnas-installer"},
+	"app-nas/freedomnas-docs": {"type": "release", "repo": "FreedomNAS/freedomnas-docs"},
+	"app-nas/freedomnas-module-containers": {"type": "release", "repo": "FreedomNAS/freedomnas-containers"},
+	"app-nas/freedomnas-module-proxy": {"type": "release", "repo": "FreedomNAS/freedomnas-proxy"},
+	"app-admin/topgrade-bin": {"type": "github-release", "repo": "topgrade-rs/topgrade"},
+	"app-crypt/archlinux-keyring": {
+		"type": "listing",
+		"url": "https://archive.archlinux.org/packages/a/archlinux-keyring/",
+		"pattern": "archlinux-keyring-([0-9]+)-1-any\\.pkg\\.tar\\.zst"
+	},
+	"app-crypt/artix-keyring": {
+		"type": "listing",
+		"url": "https://archive.artixlinux.org/packages/a/artix-keyring/",
+		"pattern": "artix-keyring-([0-9]+)-1-any\\.pkg\\.tar\\.zst"
+	},
+	"sys-apps/arch-install-scripts": {
+		"type": "git-tag",
+		"url": "https://gitlab.archlinux.org/archlinux/arch-install-scripts.git",
+		"prepare": true
+	},
+	"dev-python/mkdocs": {"type": "pypi", "project": "mkdocs", "prepare": true},
+	"dev-python/mkdocs-material-extensions": {"type": "pypi", "project": "mkdocs-material-extensions", "prepare": true},
+	"dev-python/mkdocs-get-deps": {"type": "pypi", "project": "mkdocs-get-deps", "prepare": true},
+	"dev-python/ghp-import": {"type": "pypi", "project": "ghp-import", "prepare": true},
+	"dev-python/mergedeep": {"type": "pypi", "project": "mergedeep", "prepare": true},
+	"dev-python/pyyaml-env-tag": {"type": "pypi", "project": "pyyaml-env-tag", "prepare": true},
+	"dev-python/paginate": {"type": "pypi", "project": "paginate", "prepare": true},
+	"dev-python/readtime": {"type": "pypi", "project": "readtime", "prepare": true}
+}

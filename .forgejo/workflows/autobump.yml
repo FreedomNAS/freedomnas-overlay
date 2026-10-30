@@ -1,0 +1,51 @@
+# Keeps the overlay's ebuilds on their upstream's newest version
+# (.forgejo/autobump/autobump.py, packages.json): a new vX.Y.Z tag of a
+# FreedomNAS component or module gets its release ebuild, copied from 9999;
+# topgrade-bin, the Arch/Artix keyrings, arch-install-scripts and the MkDocs
+# stack follow their upstream releases. Every bump must pass Manifest,
+# md5-cache and pkgcheck (and src_prepare where packages.json asks for it)
+# before it is committed to main; a failed one opens an issue here instead.
+#
+# Needs the secret AUTOBUMP_TOKEN: a Codeberg access token with write
+# access to this repository and its issues (scopes write:repository and
+# write:issue).
+name: autobump
+
+on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: "category/package to check, space separated (empty = all)"
+        type: string
+        default: ""
+  schedule:
+    - cron: "17 3 * * *"
+
+jobs:
+  autobump:
+    runs-on: codeberg-medium
+    container:
+      image: docker.io/gentoo/stage3:latest
+    env:
+      FEATURES: "getbinpkg -sandbox -usersandbox -ipc-sandbox -network-sandbox -pid-sandbox -mount-sandbox"
+      AUTOBUMP_TOKEN: ${{ secrets.AUTOBUMP_TOKEN }}
+    steps:
+      - name: Install the tooling
+        run: |
+          emerge-webrsync -q
+          emerge --quiet --noreplace --getbinpkg dev-vcs/git dev-util/pkgcheck
+
+      - name: Check out main
+        run: |
+          git clone -q --branch main \
+            "https://autobump:${AUTOBUMP_TOKEN}@${GITHUB_SERVER_URL#https://}/${GITHUB_REPOSITORY}.git" overlay
+
+      - name: Bump the packages
+        env:
+          PACKAGES: ${{ inputs.packages }}
+        run: |
+          cd overlay
+          git config user.name "FreedomNAS CI"
+          git config user.email "ci@freedomnas.invalid"
+          mkdir -p /var/cache/distfiles
+          python3 -I .forgejo/autobump/autobump.py --push --distdir /var/cache/distfiles $PACKAGES

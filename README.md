@@ -122,14 +122,30 @@ convenience, and nothing else in the project depends on it.
 
 ## Releases
 
-A release adds `<name>-X.Y.Z.ebuild` for the six `app-nas` packages, a copy
+A release adds `<name>-X.Y.Z.ebuild` for the `app-nas` packages, a copy
 of the `9999` ebuild (one file serves both forms: `PV` decides between
-git and the tarball), and its Manifest:
+git and the tarball), and its Manifest. Nobody writes them by hand: the
+`autobump` workflow (`.forgejo/workflows/autobump.yml`) runs every night
+and does it for every package in `.forgejo/autobump/packages.json`.
+
+| Packages | Follow | A new version |
+|----------|--------|---------------|
+| the six FreedomNAS components, the community modules | the `vX.Y.Z` tags of their Codeberg repository | a copy of `9999`; the two newest releases stay |
+| `topgrade-bin`, the Arch and Artix keyrings, `arch-install-scripts`, the MkDocs stack | their upstream's releases (GitHub, the Arch/Artix archives, GitLab tags, PyPI) | a copy of the newest ebuild, which it replaces |
+
+Each bump regenerates the Manifest, must leave `pkgcheck` with
+nothing the package did not already report (and get through
+`ebuild … prepare` where `packages.json` says `"prepare": true`), and is
+committed to `main` on its own. One that fails opens an issue instead.
+`sys-apps/pacman` is not followed: its tarball's URL holds a GitLab upload
+hash, so it is bumped by hand.
+
+The workflow needs the secret `AUTOBUMP_TOKEN`, a Codeberg access token with
+the scopes `write:repository` and `write:issue`. Locally:
 
 ```sh
-for p in app-nas/freedomnas*; do cp $p/${p#*/}-9999.ebuild $p/${p#*/}-X.Y.Z.ebuild; done
-for p in app-nas/freedomnas-*; do (cd $p && ebuild ${p#*/}-X.Y.Z.ebuild manifest); done
-pkgcheck scan app-nas/
+.forgejo/autobump/autobump.py --check            # what is outdated
+.forgejo/autobump/autobump.py app-nas/freedomnas-core   # bump and commit, no push
 ```
 
 ## Notes for packagers
