@@ -23,12 +23,13 @@
 		"url": "https://gitlab.archlinux.org/archlinux/arch-install-scripts.git",
 		"prepare": true
 	},
-	"dev-python/mkdocs": {"type": "pypi", "project": "mkdocs", "prepare": true},
-	"dev-python/mkdocs-material-extensions": {"type": "pypi", "project": "mkdocs-material-extensions", "prepare": true},
-	"dev-python/mkdocs-get-deps": {"type": "pypi", "project": "mkdocs-get-deps", "prepare": true},
-	"dev-python/ghp-import": {"type": "pypi", "project": "ghp-import", "prepare": true},
-	"dev-python/mergedeep": {"type": "pypi", "project": "mergedeep", "prepare": true},
-	"dev-python/pyyaml-env-tag": {"type": "pypi", "project": "pyyaml-env-tag", "prepare": true},
-	"dev-python/paginate": {"type": "pypi", "project": "paginate", "prepare": true},
-	"dev-python/readtime": {"type": "pypi", "project": "readtime", "prepare": true}
+	"dev-python/zensical": {
+		"type": "pypi",
+		"project": "zensical",
+		"prepare": true,
+		"cargo": {
+			"url": "https://files.pythonhosted.org/packages/source/z/zensical/zensical-{ver}.tar.gz",
+			"dir": "zensical-{ver}/crates/zensical"
+		}
+	}
 }

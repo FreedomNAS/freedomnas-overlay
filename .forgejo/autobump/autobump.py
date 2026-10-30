@@ -13,7 +13,9 @@ packages.json describes it for each package.
 
 Each bump updates Manifest (and md5-cache, if the repository tracks it),
 and pkgcheck must report nothing the package did not have before; packages
-marked "prepare" must also get through src_prepare. One commit per package. Without --push it commits
+marked "prepare" must also get through src_prepare. For "cargo" packages
+pycargoebuild rewrites CRATES, GIT_CRATES and the crate licenses from the
+new sources, and "prepare" also resolves every crate offline. One commit per package. Without --push it commits
 locally only; with --push it pushes the current branch and opens an issue
 on the Forgejo repository for every bump that failed. --check only prints
 what is outdated.
@@ -26,6 +28,7 @@ import os
 import re
 import subprocess
 import sys
+import tarfile
 import tempfile
 import urllib.parse
 import urllib.request
@@ -141,10 +144,26 @@ def bump(cp, cfg, old, new, distdir):
     for version in dropped:
         drop(cp, version)
 
+    cargo = cfg.get("cargo")
+    if cargo:
+        with tempfile.TemporaryDirectory() as tmp:
+            tarball = Path(tmp) / "src.tar.gz"
+            tarball.write_bytes(fetch(cargo["url"].format(ver=new)))
+            with tarfile.open(tarball) as tar:
+                tar.extractall(tmp, filter="data")
+            run("pycargoebuild", "-C", "-M", "-d", distdir, "-i", new_path,
+                Path(tmp) / cargo["dir"].format(ver=new))
+
     run("ebuild", new_path, "manifest", env={"DISTDIR": distdir})
     if cfg.get("prepare"):
         try:
             run("ebuild", new_path, "clean", "prepare", env={"DISTDIR": distdir})
+            if cargo:
+                tmpdir = run("portageq", "envvar", "PORTAGE_TMPDIR", capture=True).strip()
+                work = Path(tmpdir) / "portage" / f"{cp}-{new}" / "work"
+                run("cargo", "metadata", "--offline", "--format-version", "1",
+                    cwd=work / cargo["dir"].format(ver=new),
+                    env={"CARGO_HOME": str(work / "cargo_home")}, capture=True)
         finally:
             run("ebuild", new_path, "clean", env={"DISTDIR": distdir})
 

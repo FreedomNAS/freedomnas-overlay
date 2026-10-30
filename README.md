@@ -32,19 +32,14 @@ They are ordinary versioned ebuilds, keyworded `~amd64`.
 A keyring is only as current as its ebuild: packages signed by a key added
 upstream after that version fail verification until the ebuild is bumped.
 
-### MkDocs, to build freedomnas-docs
+### Zensical, to build freedomnas-docs
 
-MkDocs left `::gentoo`, so the overlay carries it and what it needs that the
-tree no longer has, for Python 3.11 to 3.14. They are ordinary versioned
-ebuilds, keyworded `~amd64`, with their original headers.
-
-| Package | Why |
-|---------|-----|
-| `dev-python/mkdocs` | builds the documentation |
-| `dev-python/mkdocs-material` | its theme (`USE=social` for the social cards, not needed here) |
-| `dev-python/mkdocs-material-extensions` | pulled in by mkdocs-material |
-| `dev-python/mkdocs-get-deps`, `ghp-import`, `mergedeep`, `pyyaml-env-tag` | mkdocs' dependencies |
-| `dev-python/paginate`, `readtime` | mkdocs-material's dependencies |
+`dev-python/zensical` is the static site generator by the authors of Material
+for MkDocs, which reads the same `mkdocs.yml` and builds freedomnas-docs
+unchanged; `app-nas/freedomnas-docs` builds with it. It replaces MkDocs,
+which left `::gentoo`. It is a Rust extension built with maturin from the PyPI sdist,
+its crates vendored through `CRATES`/`GIT_CRATES`; every Python dependency
+comes from `::gentoo`. Keyworded `~amd64`.
 
 ## Adding the overlay
 
@@ -83,7 +78,7 @@ app-nas/*::freedomnas ~amd64
 ```
 
 or `dev`, with `app-nas/*::freedomnas **` as the first line. The second
-line accepts the MkDocs packages `freedomnas-docs` is built with. The
+line accepts Zensical, which `freedomnas-docs` is built with. The
 FreedomNAS installer writes exactly this, from the channel it installs
 (`/etc/portage/package.accept_keywords/freedomnas-channel`).
 
@@ -131,7 +126,7 @@ and does it for every package in `.forgejo/autobump/packages.json`.
 | Packages | Follow | A new version |
 |----------|--------|---------------|
 | the six FreedomNAS components, the community modules | the `vX.Y.Z` tags of their Codeberg repository | a copy of `9999`; the two newest releases stay |
-| `topgrade-bin`, the Arch and Artix keyrings, `arch-install-scripts`, the MkDocs stack | their upstream's releases (GitHub, the Arch/Artix archives, GitLab tags, PyPI) | a copy of the newest ebuild, which it replaces |
+| `topgrade-bin`, the Arch and Artix keyrings, `arch-install-scripts`, `zensical` | their upstream's releases (GitHub, the Arch/Artix archives, GitLab tags, PyPI) | a copy of the newest ebuild, which it replaces |
 
 Each bump regenerates the Manifest, must leave `pkgcheck` with
 nothing the package did not already report (and get through
