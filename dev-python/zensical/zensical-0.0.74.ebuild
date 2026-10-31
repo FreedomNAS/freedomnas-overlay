@@ -36,12 +36,14 @@ CRATES="
 	byteorder-lite@0.1.0
 	bytes-str@0.2.8
 	bytes@1.12.0
+	calendrical_calculations@0.2.4
 	castaway@0.2.4
 	cc@1.4.4
 	cfg-if@1.0.4
 	color_quant@1.1.0
 	combine@4.6.7
 	compact_str@0.9.1
+	core_maths@0.1.1
 	cow-utils@0.1.3
 	cpufeatures@0.2.17
 	crc32fast@1.5.1
@@ -69,6 +71,7 @@ CRATES="
 	fdeflate@0.3.7
 	file-id@0.2.3
 	find-msvc-tools@0.1.11
+	fixed_decimal@0.7.3
 	fixedbitset@0.5.7
 	flate2@1.1.10
 	float-cmp@0.9.0
@@ -100,15 +103,28 @@ CRATES="
 	http@1.5.0
 	httparse@1.10.1
 	httpdate@1.0.3
+	icu_calendar@2.2.1
+	icu_calendar_data@2.2.0
 	icu_casemap@2.2.0
 	icu_casemap_data@2.2.0
 	icu_collections@2.2.0
+	icu_datetime@2.2.0
+	icu_datetime_data@2.2.0
+	icu_decimal@2.2.0
+	icu_decimal_data@2.2.0
+	icu_locale@2.2.0
 	icu_locale_core@2.2.0
+	icu_locale_data@2.2.0
 	icu_normalizer@2.2.0
 	icu_normalizer_data@2.2.0
+	icu_pattern@0.4.2
+	icu_plurals@2.2.0
+	icu_plurals_data@2.2.0
 	icu_properties@2.2.0
 	icu_properties_data@2.2.0
 	icu_provider@2.2.0
+	icu_time@2.2.0
+	icu_time_data@2.2.1
 	idna@1.1.0
 	idna_adapter@1.2.2
 	image-webp@0.2.4
@@ -119,6 +135,7 @@ CRATES="
 	is-macro@0.3.8
 	itertools@0.14.0
 	itoa@1.0.18
+	ixdtf@0.6.7
 	jiff-core@0.1.0
 	jiff-static@0.2.35
 	jiff-tzdb-platform@0.1.3
@@ -128,6 +145,7 @@ CRATES="
 	jni-sys-macros@0.4.1
 	jni-sys@0.4.1
 	jni@0.22.4
+	jpeg-encoder@0.7.1
 	js-sys@0.3.103
 	kqueue-sys@1.1.2
 	kqueue@1.2.0
@@ -141,6 +159,7 @@ CRATES="
 	lexical-write-integer@0.8.5
 	lexical@6.1.1
 	libc@0.2.186
+	libm@0.2.16
 	linux-raw-sys@0.12.1
 	litemap@0.8.2
 	log@0.4.33
@@ -357,7 +376,7 @@ CRATES="
 	windows_x86_64_msvc@0.53.1
 	wit-bindgen@0.46.0
 	write16@1.0.0
-	writeable@0.6.3
+	writeable@0.6.4
 	xmlwriter@0.1.0
 	yansi@1.0.1
 	yoke-derive@0.8.2
@@ -403,7 +422,7 @@ LICENSE="MIT"
 # Dependent crate licenses
 LICENSE+="
 	Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD-2 BSD CC0-1.0
-	CDLA-Permissive-2.0 ISC MIT MIT-0 Unicode-3.0 ZLIB
+	CDLA-Permissive-2.0 IJG ISC MIT MIT-0 Unicode-3.0 ZLIB
 "
 SLOT="0"
 KEYWORDS="~amd64"
