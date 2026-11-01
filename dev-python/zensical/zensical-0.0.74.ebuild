@@ -437,6 +437,7 @@ RDEPEND="
 	>=dev-python/pymdown-extensions-11.0[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-6.0.2[${PYTHON_USEDEP}]
 	>=dev-python/tomli-2.4.0[${PYTHON_USEDEP}]
+	~dev-python/zensical-ui-0.0.41[${PYTHON_USEDEP}]
 "
 
 QA_FLAGS_IGNORED="usr/lib/python3.*/site-packages/zensical/zensical.*\.so"
