@@ -38,8 +38,11 @@ upstream after that version fail verification until the ebuild is bumped.
 for MkDocs, which reads the same `mkdocs.yml` and builds freedomnas-docs
 unchanged; `app-nas/freedomnas-docs` builds with it. It replaces MkDocs,
 which left `::gentoo`. It is a Rust extension built with maturin from the PyPI sdist,
-its crates vendored through `CRATES`/`GIT_CRATES`; every Python dependency
-comes from `::gentoo`. Keyworded `~amd64`.
+its crates vendored through `CRATES`/`GIT_CRATES`. Since 0.0.74 its templates
+and icons are a package of their own, `dev-python/zensical-ui` (plain Python,
+built with hatchling), which each Zensical release pins to one version
+(`~dev-python/zensical-ui-X`); every other Python dependency comes from
+`::gentoo`. Keyworded `~amd64`.
 
 ## Adding the overlay
 
@@ -132,6 +135,13 @@ Each bump regenerates the Manifest, must leave `pkgcheck` with
 nothing the package did not already report (and get through
 `ebuild … prepare` where `packages.json` says `"prepare": true`), and is
 committed to `main` on its own. One that fails opens an issue instead.
+A PyPI package whose upstream changed its dependencies (a new one, another
+minimum) since the version being copied is not bumped either: the issue
+lists the changes, to carry into the ebuild by hand. The exception is a
+dependency listed under `"pins"` in `packages.json`, such as `zensical-ui`
+for `zensical`: upstream pins it to one version, so that package is bumped
+to it first (its two newest versions stay) and the `~category/package-X`
+line of the ebuild follows.
 `sys-apps/pacman` is not followed: its tarball's URL holds a GitLab upload
 hash, so it is bumped by hand.
 

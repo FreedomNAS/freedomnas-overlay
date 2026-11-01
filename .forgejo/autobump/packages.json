@@ -27,6 +27,7 @@
 		"type": "pypi",
 		"project": "zensical",
 		"prepare": true,
+		"pins": {"zensical-ui": "dev-python/zensical-ui"},
 		"cargo": {
 			"url": "https://files.pythonhosted.org/packages/source/z/zensical/zensical-{ver}.tar.gz",
 			"dir": "zensical-{ver}/crates/zensical"

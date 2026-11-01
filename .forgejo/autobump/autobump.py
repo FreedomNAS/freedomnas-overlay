@@ -15,7 +15,12 @@ Each bump updates Manifest (and md5-cache, if the repository tracks it),
 and pkgcheck must report nothing the package did not have before; packages
 marked "prepare" must also get through src_prepare. For "cargo" packages
 pycargoebuild rewrites CRATES, GIT_CRATES and the crate licenses from the
-new sources, and "prepare" also resolves every crate offline. One commit per package. Without --push it commits
+new sources, and "prepare" also resolves every crate offline. A "pypi"
+package whose upstream changed its dependencies since the version the
+ebuild was copied from is not bumped (the ebuild needs a hand), except
+for the dependencies listed under "pins": upstream pins those to one
+version (name==X), so that package is bumped to X first and the ebuild's
+~category/package-X follows. One commit per package. Without --push it commits
 locally only; with --push it pushes the current branch and opens an issue
 on the Forgejo repository for every bump that failed. --check only prints
 what is outdated.
@@ -103,6 +108,41 @@ def upstream_pypi(cfg):
     return json.loads(fetch(f"https://pypi.org/pypi/{cfg['project']}/json"))["info"]["version"]
 
 
+def pypi_requires(project, version):
+    info = json.loads(fetch(f"https://pypi.org/pypi/{project}/{version}/json"))["info"]
+    return {r.split(";")[0].replace(" ", "") for r in info.get("requires_dist") or []
+            if "extra ==" not in r}
+
+
+def requirement_name(requirement):
+    return re.split(r"[<>=!~\[]", requirement, maxsplit=1)[0].lower().replace("_", "-")
+
+
+def follow_requires(cfg, old, new, text, distdir):
+    before = pypi_requires(cfg["project"], old)
+    after = pypi_requires(cfg["project"], new)
+    pins = cfg.get("pins", {})
+    changed = before ^ after
+    unknown = sorted(r for r in changed if requirement_name(r) not in pins)
+    if unknown:
+        raise RuntimeError(f"upstream changed its dependencies since {old}, "
+                           f"the ebuild needs them by hand: {', '.join(unknown)}")
+    for requirement in sorted(after):
+        name = requirement_name(requirement)
+        if name not in pins or "==" not in requirement:
+            continue
+        pinned_cp, version = pins[name], requirement.split("==", 1)[1]
+        if version not in releases(pinned_cp):
+            pinned_old = (releases(pinned_cp) or [None])[-1]
+            log(f"  {pinned_cp}: {pinned_old or 'none'} -> {version} (pinned by {cfg['project']})")
+            bump(pinned_cp, {"type": "pypi", "project": name, "prepare": True, "keep": 2},
+                 pinned_old, version, distdir)
+        text, count = re.subn(rf"~{re.escape(pinned_cp)}-[0-9][^\[\s\"]*", f"~{pinned_cp}-{version}", text)
+        if not count:
+            raise RuntimeError(f"{name}=={version} is pinned upstream but the ebuild has no ~{pinned_cp}")
+    return text
+
+
 UPSTREAMS = {
     "release": upstream_release,
     "git-tag": upstream_git_tag,
@@ -139,7 +179,10 @@ def bump(cp, cfg, old, new, distdir):
     new_path = REPO / cp / f"{pn}-{new}.ebuild"
     release = cfg["type"] == "release"
     source = f"{pn}-9999.ebuild" if release else f"{pn}-{old}.ebuild"
-    new_path.write_text((REPO / cp / source).read_text())
+    text = (REPO / cp / source).read_text()
+    if cfg["type"] == "pypi" and old:
+        text = follow_requires(cfg, old, new, text, distdir)
+    new_path.write_text(text)
     dropped = releases(cp)[:-cfg.get("keep", 2 if release else 1)]
     for version in dropped:
         drop(cp, version)
