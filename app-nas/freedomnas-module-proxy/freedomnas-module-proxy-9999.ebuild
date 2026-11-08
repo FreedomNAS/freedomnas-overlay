@@ -21,12 +21,15 @@ SLOT="0"
 
 # A community module: freedomnas-core loads it from /usr/lib/freedomnas/modules
 # and merges its profile fragment from /usr/lib/freedomnas/profiles.
-# Caddy and lego are installed from the WebUI (www-servers/caddy and app-crypt/lego, its own profile).
+# It brings Caddy and lego with it; both are ~amd64, which the installer
+# accepts in /etc/portage/package.accept_keywords/freedomnas.
 # 0.9.12's core loaded a single modules directory, so a community module
 # beside it would hide the core's own.
 RDEPEND="
 	>=app-nas/freedomnas-core-0.9.13
 	>=app-nas/freedomnas-webui-0.9.13
+	>=www-servers/caddy-2.11
+	app-crypt/lego
 "
 
 src_install() {

@@ -20,13 +20,17 @@ LICENSE="MPL-2.0"
 SLOT="0"
 
 # A community module: freedomnas-core loads it from /usr/lib/freedomnas/modules
-# and merges its profile fragment from /usr/lib/freedomnas/profiles. Docker
-# itself is installed from the WebUI, with the packages freedomnas-profiles
-# names for Gentoo. 0.9.12's core loaded a single modules directory, so a
-# community module beside it would hide the core's own.
+# and merges its profile fragment from /usr/lib/freedomnas/profiles. It
+# brings Docker with it: the packages freedomnas-profiles names for Gentoo.
+# 0.9.12's core loaded a single modules directory, so a community module
+# beside it would hide the core's own.
 RDEPEND="
 	>=app-nas/freedomnas-core-0.9.13
 	>=app-nas/freedomnas-webui-0.9.13
+	app-containers/docker
+	app-containers/docker-cli
+	app-containers/containerd
+	app-containers/docker-compose
 "
 
 src_install() {
