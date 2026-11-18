@@ -4,15 +4,15 @@
 EAPI=8
 
 DESCRIPTION="FreedomNAS reverse proxy: Caddy with HTTPS for every web app"
-HOMEPAGE="https://codeberg.org/FreedomNAS/freedomnas-proxy"
+HOMEPAGE="https://github.com/FreedomNAS/freedomnas-proxy"
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://codeberg.org/FreedomNAS/freedomnas-proxy.git"
+	EGIT_REPO_URI="https://github.com/FreedomNAS/freedomnas-proxy.git"
 	EGIT_BRANCH="dev"
 else
-	SRC_URI="https://codeberg.org/FreedomNAS/freedomnas-proxy/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/freedomnas-proxy"
+	SRC_URI="https://github.com/FreedomNAS/freedomnas-proxy/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/freedomnas-proxy-${PV}"
 	KEYWORDS="~amd64"
 fi
 

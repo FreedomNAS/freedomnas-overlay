@@ -12,6 +12,7 @@
 		catalogue apps go behind it by themselves.
 	</longdescription>
 	<upstream>
+		<remote-id type="github">FreedomNAS/freedomnas-proxy</remote-id>
 		<remote-id type="codeberg">FreedomNAS/freedomnas-proxy</remote-id>
 	</upstream>
 </pkgmetadata>

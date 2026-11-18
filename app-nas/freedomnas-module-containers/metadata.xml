@@ -13,6 +13,7 @@
 		Vaultwarden).
 	</longdescription>
 	<upstream>
+		<remote-id type="github">FreedomNAS/freedomnas-containers</remote-id>
 		<remote-id type="codeberg">FreedomNAS/freedomnas-containers</remote-id>
 	</upstream>
 </pkgmetadata>

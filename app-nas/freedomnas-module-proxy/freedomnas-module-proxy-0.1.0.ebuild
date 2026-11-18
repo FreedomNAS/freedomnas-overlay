@@ -1,0 +1,41 @@
+# Copyright 2026 FreedomNAS Team
+# Distributed under the terms of the GNU General Public License v2 or later
+
+EAPI=8
+
+DESCRIPTION="FreedomNAS reverse proxy: Caddy with HTTPS for every web app"
+HOMEPAGE="https://github.com/FreedomNAS/freedomnas-proxy"
+
+if [[ ${PV} == 9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/FreedomNAS/freedomnas-proxy.git"
+	EGIT_BRANCH="dev"
+else
+	SRC_URI="https://github.com/FreedomNAS/freedomnas-proxy/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/freedomnas-proxy-${PV}"
+	KEYWORDS="~amd64"
+fi
+
+LICENSE="MPL-2.0"
+SLOT="0"
+
+# A community module: freedomnas-core loads it from /usr/lib/freedomnas/modules
+# and merges its profile fragment from /usr/lib/freedomnas/profiles.
+# It brings Caddy and lego with it; both are ~amd64, which the installer
+# accepts in /etc/portage/package.accept_keywords/freedomnas.
+# 0.9.12's core loaded a single modules directory, so a community module
+# beside it would hide the core's own.
+RDEPEND="
+	>=app-nas/freedomnas-core-0.9.13
+	>=app-nas/freedomnas-webui-0.9.13
+	>=www-servers/caddy-2.11
+	app-crypt/lego
+"
+
+src_install() {
+	insinto /usr/lib/freedomnas/modules
+	doins -r modules/proxy
+	insinto /usr/lib/freedomnas/profiles
+	doins -r profiles/proxy
+	dodoc README.md
+}

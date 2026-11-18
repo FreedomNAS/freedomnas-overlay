@@ -4,15 +4,15 @@
 EAPI=8
 
 DESCRIPTION="FreedomNAS containers: Docker on its own ZFS datasets, apps and a catalogue"
-HOMEPAGE="https://codeberg.org/FreedomNAS/freedomnas-containers"
+HOMEPAGE="https://github.com/FreedomNAS/freedomnas-containers"
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://codeberg.org/FreedomNAS/freedomnas-containers.git"
+	EGIT_REPO_URI="https://github.com/FreedomNAS/freedomnas-containers.git"
 	EGIT_BRANCH="dev"
 else
-	SRC_URI="https://codeberg.org/FreedomNAS/freedomnas-containers/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/freedomnas-containers"
+	SRC_URI="https://github.com/FreedomNAS/freedomnas-containers/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/freedomnas-containers-${PV}"
 	KEYWORDS="~amd64"
 fi
 
