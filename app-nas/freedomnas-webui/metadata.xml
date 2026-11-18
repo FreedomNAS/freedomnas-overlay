@@ -17,6 +17,7 @@
 		<flag name="openrc">Install an OpenRC service instead of the cron hook</flag>
 	</use>
 	<upstream>
+		<remote-id type="github">FreedomNAS/freedomnas-webui</remote-id>
 		<remote-id type="codeberg">FreedomNAS/freedomnas-webui</remote-id>
 	</upstream>
 </pkgmetadata>

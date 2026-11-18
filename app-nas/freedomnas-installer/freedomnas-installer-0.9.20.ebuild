@@ -8,15 +8,15 @@ PYTHON_COMPAT=( python3_{12..15} )
 inherit python-single-r1
 
 DESCRIPTION="Profile-driven FreedomNAS installer (clean install or in-place)"
-HOMEPAGE="https://codeberg.org/FreedomNAS/freedomnas-installer"
+HOMEPAGE="https://github.com/FreedomNAS/freedomnas-installer"
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://codeberg.org/FreedomNAS/${PN}.git"
+	EGIT_REPO_URI="https://github.com/FreedomNAS/${PN}.git"
 	EGIT_BRANCH="dev"
 else
-	SRC_URI="https://codeberg.org/FreedomNAS/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/${PN}"
+	SRC_URI="https://github.com/FreedomNAS/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}-${PV}"
 	KEYWORDS="~amd64"
 fi
 

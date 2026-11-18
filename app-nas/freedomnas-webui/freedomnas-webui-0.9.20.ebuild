@@ -8,15 +8,15 @@ PYTHON_COMPAT=( python3_{12..15} )
 inherit python-single-r1
 
 DESCRIPTION="FreedomNAS WebUI — FastAPI backend and Jinja2 frontend"
-HOMEPAGE="https://codeberg.org/FreedomNAS/freedomnas-webui"
+HOMEPAGE="https://github.com/FreedomNAS/freedomnas-webui"
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://codeberg.org/FreedomNAS/${PN}.git"
+	EGIT_REPO_URI="https://github.com/FreedomNAS/${PN}.git"
 	EGIT_BRANCH="dev"
 else
-	SRC_URI="https://codeberg.org/FreedomNAS/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/${PN}"
+	SRC_URI="https://github.com/FreedomNAS/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}-${PV}"
 	KEYWORDS="~amd64"
 fi
 
@@ -36,7 +36,6 @@ RDEPEND="
 		dev-python/fastapi[${PYTHON_USEDEP}]
 		dev-python/uvicorn[${PYTHON_USEDEP}]
 		dev-python/jinja2[${PYTHON_USEDEP}]
-		dev-python/python-multipart[${PYTHON_USEDEP}]
 		dev-python/python-pam[${PYTHON_USEDEP}]
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 		dev-python/websockets[${PYTHON_USEDEP}]

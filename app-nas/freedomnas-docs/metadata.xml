@@ -11,6 +11,7 @@
 		of the version that is running, with no network access.
 	</longdescription>
 	<upstream>
+		<remote-id type="github">FreedomNAS/freedomnas-docs</remote-id>
 		<remote-id type="codeberg">FreedomNAS/freedomnas-docs</remote-id>
 	</upstream>
 </pkgmetadata>

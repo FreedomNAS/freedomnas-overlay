@@ -14,6 +14,7 @@
 		and the module orchestrator.
 	</longdescription>
 	<upstream>
+		<remote-id type="github">FreedomNAS/freedomnas-core</remote-id>
 		<remote-id type="codeberg">FreedomNAS/freedomnas-core</remote-id>
 	</upstream>
 </pkgmetadata>

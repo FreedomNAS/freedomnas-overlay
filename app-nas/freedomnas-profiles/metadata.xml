@@ -13,6 +13,7 @@
 		the boot-time scripts). Contains no executable logic of its own.
 	</longdescription>
 	<upstream>
+		<remote-id type="github">FreedomNAS/freedomnas-profiles</remote-id>
 		<remote-id type="codeberg">FreedomNAS/freedomnas-profiles</remote-id>
 	</upstream>
 </pkgmetadata>
