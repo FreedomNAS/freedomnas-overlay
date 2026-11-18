@@ -144,7 +144,8 @@ def follow_requires(cfg, old, new, text, distdir):
         if version not in releases(pinned_cp):
             pinned_old = (releases(pinned_cp) or [None])[-1]
             log(f"  {pinned_cp}: {pinned_old or 'none'} -> {version} (pinned by {cfg['project']})")
-            bump(pinned_cp, {"type": "pypi", "project": name, "prepare": True, "keep": 2},
+            bump(pinned_cp, {"type": "pypi", "project": name, "prepare": True, "keep": 2,
+                             "allow": ["RedundantVersion"]},
                  pinned_old, version, distdir)
         text, count = re.subn(rf"~{re.escape(pinned_cp)}-[0-9][^\[\s\"]*", f"~{pinned_cp}-{version}", text)
         if not count:
@@ -229,7 +230,7 @@ def bump(cp, cfg, old, new, distdir):
             run("egencache", "--update", "--repo", repo_name, "--cache-dir", cache_dir,
                 "--repositories-configuration", repos_conf, cp)
 
-    new_problems = pkgcheck_keywords(cp) - before
+    new_problems = pkgcheck_keywords(cp) - before - set(cfg.get("allow", []))
     if new_problems:
         out = run("pkgcheck", "scan", cp, capture=True, check=False)
         raise RuntimeError(f"pkgcheck reports new problems: {', '.join(sorted(new_problems))}\n{out}")
