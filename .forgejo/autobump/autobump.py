@@ -122,11 +122,20 @@ def follow_requires(cfg, old, new, text, distdir):
     before = pypi_requires(cfg["project"], old)
     after = pypi_requires(cfg["project"], new)
     pins = cfg.get("pins", {})
+    names_before = {requirement_name(r) for r in before}
+    names_after = {requirement_name(r) for r in after}
     changed = before ^ after
-    unknown = sorted(r for r in changed if requirement_name(r) not in pins)
+    unknown = sorted(r for r in changed if requirement_name(r) not in pins
+                     and requirement_name(r) in names_after)
     if unknown:
-        raise RuntimeError(f"upstream changed its dependencies since {old}, "
+        raise RuntimeError(f"upstream added or changed dependencies since {old}, "
                            f"the ebuild needs them by hand: {', '.join(unknown)}")
+    for name in sorted(names_before - names_after - set(pins)):
+        text, count = re.subn(rf"^[ \t]*[<>=~]*dev-python/{re.escape(name)}(?:-[0-9][^\s\"]*)?(?:\[[^\]]*\])?[ \t]*\n",
+                              "", text, flags=re.M)
+        if not count:
+            raise RuntimeError(f"upstream dropped {name} since {old} but the ebuild has no dev-python/{name}")
+        log(f"  dropped dev-python/{name}: upstream no longer depends on it")
     for requirement in sorted(after):
         name = requirement_name(requirement)
         if name not in pins or "==" not in requirement:
