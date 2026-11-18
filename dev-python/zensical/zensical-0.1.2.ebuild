@@ -151,13 +151,13 @@ CRATES="
 	kqueue@1.2.0
 	kurbo@0.13.1
 	lazy_static@1.5.0
-	lexical-core@0.8.5
-	lexical-parse-float@0.8.5
-	lexical-parse-integer@0.8.6
-	lexical-util@0.8.5
-	lexical-write-float@0.8.5
-	lexical-write-integer@0.8.5
-	lexical@6.1.1
+	lexical-core@1.0.6
+	lexical-parse-float@1.0.6
+	lexical-parse-integer@1.0.6
+	lexical-util@1.0.7
+	lexical-write-float@1.0.6
+	lexical-write-integer@1.0.6
+	lexical@7.0.5
 	libc@0.2.186
 	libm@0.2.16
 	linux-raw-sys@0.12.1
@@ -247,10 +247,10 @@ CRATES="
 	roxmltree@0.21.1
 	rustc-hash@2.1.3
 	rustc_version@0.4.1
-	rustix@1.1.4
+	rustix@1.1.6
 	rustls-pki-types@1.15.1
-	rustls-webpki@0.103.15
-	rustls@0.23.45
+	rustls-webpki@0.103.16
+	rustls@0.23.46
 	rustversion@1.0.23
 	ryu@1.0.23
 	same-file@1.0.6
@@ -272,7 +272,6 @@ CRATES="
 	simd_cesu8@1.1.1
 	simdutf8@0.1.5
 	simplecss@0.2.2
-	siphasher@0.3.11
 	siphasher@1.0.3
 	skrifa@0.44.0
 	slab@0.4.12
@@ -286,15 +285,15 @@ CRATES="
 	subtle@2.6.1
 	svgtypes@0.16.1
 	swc_atoms@10.0.0
-	swc_common@26.0.0
-	swc_css@31.0.0
-	swc_css_ast@26.0.0
-	swc_css_codegen@26.0.0
+	swc_common@27.0.0
+	swc_css@33.0.0
+	swc_css_ast@27.0.0
+	swc_css_codegen@27.0.0
 	swc_css_codegen_macros@1.0.2
-	swc_css_minifier@26.0.0
-	swc_css_parser@26.0.0
-	swc_css_utils@26.0.0
-	swc_css_visit@26.0.0
+	swc_css_minifier@27.0.0
+	swc_css_parser@27.0.0
+	swc_css_utils@27.0.0
+	swc_css_visit@27.0.0
 	swc_eq_ignore_macros@1.0.1
 	swc_macros_common@1.0.1
 	swc_visit@2.0.2
@@ -349,7 +348,7 @@ CRATES="
 	wasm-bindgen@0.2.126
 	web-sys@0.3.103
 	webbrowser@1.2.4
-	webpki-roots@1.0.9
+	webpki-roots@1.0.11
 	weezl@0.1.12
 	winapi-util@0.1.11
 	windows-link@0.2.1
@@ -429,7 +428,6 @@ KEYWORDS="~amd64"
 
 RDEPEND="
 	>=dev-python/click-8.1.8[${PYTHON_USEDEP}]
-	>=dev-python/deepmerge-2.0[${PYTHON_USEDEP}]
 	>=dev-python/jinja2-3.1[${PYTHON_USEDEP}]
 	>=dev-python/markdown-3.7[${PYTHON_USEDEP}]
 	>=dev-python/pathspec-1.0.4[${PYTHON_USEDEP}]
@@ -437,7 +435,7 @@ RDEPEND="
 	>=dev-python/pymdown-extensions-11.0[${PYTHON_USEDEP}]
 	>=dev-python/pyyaml-6.0.2[${PYTHON_USEDEP}]
 	>=dev-python/tomli-2.4.0[${PYTHON_USEDEP}]
-	~dev-python/zensical-ui-0.0.41[${PYTHON_USEDEP}]
+	~dev-python/zensical-ui-0.0.42[${PYTHON_USEDEP}]
 "
 
 QA_FLAGS_IGNORED="usr/lib/python3.*/site-packages/zensical/zensical.*\.so"
