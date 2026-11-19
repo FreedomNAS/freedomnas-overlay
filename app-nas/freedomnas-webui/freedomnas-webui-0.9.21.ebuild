@@ -36,7 +36,6 @@ RDEPEND="
 		dev-python/fastapi[${PYTHON_USEDEP}]
 		dev-python/uvicorn[${PYTHON_USEDEP}]
 		dev-python/jinja2[${PYTHON_USEDEP}]
-		dev-python/python-multipart[${PYTHON_USEDEP}]
 		dev-python/python-pam[${PYTHON_USEDEP}]
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 		dev-python/websockets[${PYTHON_USEDEP}]
