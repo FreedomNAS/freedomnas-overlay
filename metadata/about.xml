@@ -10,7 +10,7 @@
       <name>FreedomNAS Team</name>
     </owner>
     <source type="git">
-      <uri protocol="https">https://codeberg.org/FreedomNAS/freedomnas-overlay.git</uri>
+      <uri protocol="https">https://github.com/FreedomNAS/freedomnas-overlay.git</uri>
     </source>
   </repo>
 </repositories>

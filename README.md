@@ -1,6 +1,6 @@
 # freedomnas-overlay
 
-Gentoo ebuilds for [FreedomNAS](https://codeberg.org/FreedomNAS) — the
+Gentoo ebuilds for [FreedomNAS](https://github.com/FreedomNAS) — the
 OS-agnostic storage appliance. Everything lives in a dedicated `app-nas`
 category, because these packages are one appliance rather than four
 unrelated tools.
@@ -49,7 +49,7 @@ built with hatchling), which each Zensical release pins to one version
 With `eselect repository`:
 
 ```sh
-eselect repository add freedomnas git https://codeberg.org/FreedomNAS/freedomnas-overlay.git
+eselect repository add freedomnas git https://github.com/FreedomNAS/freedomnas-overlay.git
 emaint sync --repo freedomnas
 ```
 
@@ -59,7 +59,7 @@ Or by hand, in `/etc/portage/repos.conf/freedomnas.conf`:
 [freedomnas]
 location = /var/db/repos/freedomnas
 sync-type = git
-sync-uri = https://codeberg.org/FreedomNAS/freedomnas-overlay.git
+sync-uri = https://github.com/FreedomNAS/freedomnas-overlay.git
 auto-sync = yes
 masters = gentoo
 ```

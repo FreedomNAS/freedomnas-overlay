@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="FreedomNAS — OS-agnostic storage appliance (meta package)"
-HOMEPAGE="https://codeberg.org/FreedomNAS"
+HOMEPAGE="https://github.com/FreedomNAS"
 S="${WORKDIR}"
 
 LICENSE="metapackage"
