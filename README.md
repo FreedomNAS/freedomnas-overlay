@@ -123,12 +123,12 @@ convenience, and nothing else in the project depends on it.
 A release adds `<name>-X.Y.Z.ebuild` for the `app-nas` packages, a copy
 of the `9999` ebuild (one file serves both forms: `PV` decides between
 git and the tarball), and its Manifest. Nobody writes them by hand: the
-`autobump` workflow (`.forgejo/workflows/autobump.yml`) runs every night
-and does it for every package in `.forgejo/autobump/packages.json`.
+`autobump` workflow (`.github/workflows/autobump.yml`) runs every night
+and does it for every package in `.github/autobump/packages.json`.
 
 | Packages | Follow | A new version |
 |----------|--------|---------------|
-| the six FreedomNAS components, the community modules | the `vX.Y.Z` tags of their Codeberg repository | a copy of `9999`; the two newest releases stay |
+| the six FreedomNAS components, the community modules | the `vX.Y.Z` tags of their GitHub repository | a copy of `9999`; the two newest releases stay |
 | `topgrade-bin`, the Arch and Artix keyrings, `arch-install-scripts`, `zensical` | their upstream's releases (GitHub, the Arch/Artix archives, GitLab tags, PyPI) | a copy of the newest ebuild, which it replaces |
 
 Each bump regenerates the Manifest, must leave `pkgcheck` with
@@ -145,12 +145,11 @@ line of the ebuild follows.
 `sys-apps/pacman` is not followed: its tarball's URL holds a GitLab upload
 hash, so it is bumped by hand.
 
-The workflow needs the secret `AUTOBUMP_TOKEN`, a Codeberg access token with
-the scopes `write:repository` and `write:issue`. Locally:
+The workflow pushes and opens issues with its own `GITHUB_TOKEN`. Locally:
 
 ```sh
-.forgejo/autobump/autobump.py --check            # what is outdated
-.forgejo/autobump/autobump.py app-nas/freedomnas-core   # bump and commit, no push
+.github/autobump/autobump.py --check            # what is outdated
+.github/autobump/autobump.py app-nas/freedomnas-core   # bump and commit, no push
 ```
 
 ## Notes for packagers

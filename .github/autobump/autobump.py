@@ -84,7 +84,7 @@ def git_tags(url):
 
 
 def upstream_release(cfg):
-    return git_tags(f"https://codeberg.org/{cfg['repo']}.git")
+    return git_tags(f"https://github.com/{cfg['repo']}.git")
 
 
 def upstream_git_tag(cfg):
@@ -248,13 +248,12 @@ def restore(cp):
 
 
 def report_failure(cp, new, error):
-    server = os.environ["GITHUB_SERVER_URL"]
-    api = f"{server}/api/v1/repos/{os.environ['GITHUB_REPOSITORY']}/issues"
-    headers = {"Authorization": f"token {os.environ['AUTOBUMP_TOKEN']}",
+    api = f"{os.environ.get('GITHUB_API_URL', 'https://api.github.com')}/repos/{os.environ['GITHUB_REPOSITORY']}/issues"
+    headers = {"Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+               "Accept": "application/vnd.github+json",
                "Content-Type": "application/json"}
     title = f"autobump: {cp} {new} failed"
-    query = urllib.parse.urlencode({"state": "open", "type": "issues", "q": title, "limit": 50})
-    existing = json.loads(fetch(f"{api}?{query}", headers=headers))
+    existing = json.loads(fetch(f"{api}?state=open&per_page=100", headers=headers))
     if any(issue["title"] == title for issue in existing):
         return
     body = f"The automatic bump of `{cp}` to {new} failed:\n\n```\n{error[-6000:]}\n```\n"
