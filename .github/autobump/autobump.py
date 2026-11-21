@@ -92,7 +92,9 @@ def upstream_git_tag(cfg):
 
 
 def upstream_github_release(cfg):
-    release = json.loads(fetch(f"https://api.github.com/repos/{cfg['repo']}/releases/latest"))
+    token = os.environ.get("GH_TOKEN")
+    headers = {"Authorization": f"Bearer {token}"} if token else None
+    release = json.loads(fetch(f"https://api.github.com/repos/{cfg['repo']}/releases/latest", headers=headers))
     m = VERSION_RE.match(release["tag_name"])
     return m.group(1) if m else None
 
