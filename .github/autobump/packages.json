@@ -10,7 +10,7 @@
 	"app-admin/topgrade-bin": {"type": "github-release", "repo": "topgrade-rs/topgrade"},
 	"app-crypt/archlinux-keyring": {
 		"type": "listing",
-		"url": "https://archive.archlinux.org/packages/a/archlinux-keyring/",
+		"url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/",
 		"pattern": "archlinux-keyring-([0-9]+)-1-any\\.pkg\\.tar\\.zst"
 	},
 	"app-crypt/artix-keyring": {
