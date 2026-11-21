@@ -26,7 +26,7 @@ They are ordinary versioned ebuilds, keyworded `~amd64`.
 |---------|------------------|
 | `sys-apps/pacman` | pacman, `pacman-key`, libalpm. Scriptlet shell and `ldconfig` point at the paths of the Arch/Artix root being installed |
 | `sys-apps/arch-install-scripts` | `pacstrap` and `genfstab`; `arch-chroot` comes from `::gentoo`'s `sys-apps/arch-chroot` |
-| `app-crypt/archlinux-keyring` | `/usr/share/pacman/keyrings/archlinux*`, repackaged from `archive.archlinux.org` |
+| `app-crypt/archlinux-keyring` | `/usr/share/pacman/keyrings/archlinux*`, repackaged from the `core` repository of `geo.mirror.pkgbuild.com` |
 | `app-crypt/artix-keyring` | `/usr/share/pacman/keyrings/artix*`, repackaged from `archive.artixlinux.org` |
 
 A keyring is only as current as its ebuild: packages signed by a key added
