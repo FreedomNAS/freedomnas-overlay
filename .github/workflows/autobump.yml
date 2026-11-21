@@ -1,7 +1,7 @@
 # Keeps the overlay's ebuilds on their upstream's newest version
 # (.github/autobump/autobump.py, packages.json): a new vX.Y.Z tag of a
 # FreedomNAS component or module gets its release ebuild, copied from 9999;
-# topgrade-bin, the Arch/Artix keyrings, arch-install-scripts and Zensical
+# topgrade, the Arch/Artix keyrings, arch-install-scripts and Zensical
 # follow their upstream releases. Every bump must pass Manifest,
 # md5-cache and pkgcheck (and src_prepare where packages.json asks for it)
 # before it is committed to main; a failed one opens an issue here instead.

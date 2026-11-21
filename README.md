@@ -129,7 +129,7 @@ and does it for every package in `.github/autobump/packages.json`.
 | Packages | Follow | A new version |
 |----------|--------|---------------|
 | the six FreedomNAS components, the community modules | the `vX.Y.Z` tags of their GitHub repository | a copy of `9999`; the two newest releases stay |
-| `topgrade-bin`, the Arch and Artix keyrings, `arch-install-scripts`, `zensical` | their upstream's releases (GitHub, the Arch/Artix archives, GitLab tags, PyPI) | a copy of the newest ebuild, which it replaces |
+| `topgrade`, the Arch and Artix keyrings, `arch-install-scripts`, `zensical` | their upstream's releases (GitHub, the Arch core mirror and three Artix mirrors, GitLab tags, PyPI) | a copy of the newest ebuild, which it replaces |
 
 Each bump regenerates the Manifest, must leave `pkgcheck` with
 nothing the package did not already report (and get through

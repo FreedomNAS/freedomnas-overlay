@@ -8,9 +8,9 @@
 	<longdescription lang="en">
 		Topgrade runs the update command of every package manager, language
 		toolchain and container runtime it finds, which is what the WebUI's
-		Updates page drives. This package installs the release binary rather
-		than building it: the source ebuild pulls the whole Rust toolchain
-		and several hundred crates, which is a long compile on a NAS.
+		Updates page drives. It is built from source without the self-update
+		feature: the release binary replaces itself before the update and
+		waits for an answer the WebUI cannot give.
 	</longdescription>
 	<upstream>
 		<remote-id type="github">topgrade-rs/topgrade</remote-id>
