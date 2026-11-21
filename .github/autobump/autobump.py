@@ -99,8 +99,18 @@ def upstream_github_release(cfg):
     return m.group(1) if m else None
 
 
+def first_answer(urls):
+    error = None
+    for url in urls:
+        try:
+            return fetch(url)
+        except Exception as e:
+            error = e
+    raise error
+
+
 def upstream_listing(cfg):
-    listing = fetch(cfg["url"]).decode()
+    listing = first_answer(cfg.get("urls") or [cfg["url"]]).decode()
     names = {urllib.parse.unquote(n) for n in re.findall(r'href="([^"]+)"', listing)}
     pattern = re.compile(cfg["pattern"] + "$")
     return newest(m.group(1) for n in names if (m := pattern.match(n)))

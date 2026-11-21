@@ -7,7 +7,11 @@ inherit unpacker
 
 DESCRIPTION="Keys that sign Artix Linux packages, for pacman-key --populate artix"
 HOMEPAGE="https://gitea.artixlinux.org/artix/artix-keyring"
-SRC_URI="https://archive.artixlinux.org/packages/a/${PN}/${P}-1-any.pkg.tar.zst"
+SRC_URI="
+	https://mirror1.artixlinux.org/repos/system/os/x86_64/${P}-1-any.pkg.tar.zst
+	https://mirrors.dotsrc.org/artix-linux/repos/system/os/x86_64/${P}-1-any.pkg.tar.zst
+	https://mirror.clarkson.edu/artix-linux/repos/system/os/x86_64/${P}-1-any.pkg.tar.zst
+"
 S="${WORKDIR}"
 
 LICENSE="GPL-1+"

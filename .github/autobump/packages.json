@@ -15,7 +15,11 @@
 	},
 	"app-crypt/artix-keyring": {
 		"type": "listing",
-		"url": "https://archive.artixlinux.org/packages/a/artix-keyring/",
+		"urls": [
+			"https://mirror1.artixlinux.org/repos/system/os/x86_64/",
+			"https://mirrors.dotsrc.org/artix-linux/repos/system/os/x86_64/",
+			"https://mirror.clarkson.edu/artix-linux/repos/system/os/x86_64/"
+		],
 		"pattern": "artix-keyring-([0-9]+)-1-any\\.pkg\\.tar\\.zst"
 	},
 	"sys-apps/arch-install-scripts": {
